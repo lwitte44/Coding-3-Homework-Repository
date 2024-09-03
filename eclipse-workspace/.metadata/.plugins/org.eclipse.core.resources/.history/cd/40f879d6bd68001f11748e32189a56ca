@@ -1,0 +1,37 @@
+package driver;
+
+public class Salesman 
+{
+	//fields
+	public String Name;
+	public int Revenue;
+	
+	//constructor
+	public Salesman (String name, int revenue)
+	{
+		this.Name = name;
+		this.Revenue = revenue;
+	}
+	
+	//getters
+	public String getName()
+	{
+		return this.Name;
+	}
+	public int getRevenue()
+	{
+		return this.Revenue;
+	}
+	
+	//display method
+	public String display()
+	{
+		return this.Name + this.Revenue;
+	}
+	
+	public Salesman[] topFive(Salesman[] sales)
+	{
+		return sales;
+	}
+
+}

@@ -1,0 +1,20 @@
+package driver;
+
+public class Main {
+
+	public static void main(String[] args) 
+	{
+		Salesman John = new Salesman("John", 101);
+		Salesman Billy = new Salesman("Billy", 1100);
+		Salesman Nick = new Salesman("Nick", 100);
+		Salesman James = new Salesman("James", 300);
+		Salesman Dom = new Salesman("Dom", 1101);
+		Salesman Trevor = new Salesman("Trevor", 80);
+		Salesman Josh = new Salesman("Josh", 500);
+		Salesman[] allSales = new Salesman[] {John, Billy, Nick, James, Dom, Trevor, Josh};
+		Salesman[] topFive = Salesman.topFive
+		
+
+	}
+
+}
