@@ -84,7 +84,6 @@ public class HumanBeings
             {
                 totalBabies = totalBabies + curDisciples.population / 2 * 2;
             }
-            //totalDisciplesNum = totalDisciplesNum + curDisciples.population;
         }
         
         long nonBelieversNum = 0;
@@ -106,6 +105,18 @@ public class HumanBeings
         }
         
         iApprentices = this.apprentices.iterator();
+        while(iApprentices.hasNext())
+        {
+            HumanGroup curApprentices = iApprentices.next();
+            if(curApprentices.yearsBeingApprentice == 3)
+            {
+                curApprentices.isApprentice = false;
+                curApprentices.yearsBeingApprentice = 0;
+                curApprentices.isDisciple = true;
+                iApprentices.remove();
+                this.disciples.add(curApprentices);
+            }
+        }
         
         iDisciples = this.disciples.iterator();
         while(iDisciples.hasNext())
@@ -169,10 +180,7 @@ public class HumanBeings
             this.nonBelievers.add(babies);
         }
     }
-    void FindApprentice()
-    {
-        
-    }
+    
     void Report()
     {
         long totalDisciples = 0;
@@ -185,19 +193,20 @@ public class HumanBeings
         
         long TotalPopulation = 0;
         this.totalNonBelievers = 0;
-        this.totalPopulation = TotalPopulation + totalDisciples;
-        this.totalPopulation = this.totalPopulation + this.totalNonBelievers;
+        TotalPopulation = TotalPopulation + totalDisciples;
         for(int i = 0; i < this.nonBelievers.size(); i++)
         {
         	TotalPopulation = TotalPopulation + this.nonBelievers.get(i).population;
+        	this.totalNonBelievers = this.totalNonBelievers + this.nonBelievers.get(i).population;
         }
         for(int i = 0; i < this.apprentices.size(); i++)
         {
         	TotalPopulation = TotalPopulation + this.apprentices.get(i).population;
         }
+        this.totalPopulation = TotalPopulation;
         
         System.out.println("Total population is: " + this.totalPopulation);
-        System.out.println("Total population of disciples is: " + this.totalPopulation);
+        System.out.println("Total population of disciples is: " + this.totalDisciples);
     }
     
 }

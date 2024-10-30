@@ -28,7 +28,9 @@ public class HumanGroup
     
     public boolean CanBeApprentice()
     {
-        return this.age >= this.humanSettings.ageAsApprentice && !this.isApprentice && this.isDisciple;
+        return this.age >= this.humanSettings.ageAsApprentice 
+        		&& !this.isApprentice 
+        		&& !this.isDisciple;
     }
     
     public boolean HasBecomeDisciple()
@@ -36,17 +38,11 @@ public class HumanGroup
         return this.isDisciple;
     }
     
-    public boolean IsGivingBirth()
-    {
-    	if(this.age == this.humanSettings.ageOfGivingBirth)
-    	{
-    		 return true;
-    	}
-    	else
-    	{
-    		return false;
-    	}
-    }
+//    public boolean IsGivingBirth()
+//    {
+//    	this.age = this.humanSettings.ageOfGivingBirth
+//    
+//    }
     //fix
     public boolean CanTrainApprentice()
     {
