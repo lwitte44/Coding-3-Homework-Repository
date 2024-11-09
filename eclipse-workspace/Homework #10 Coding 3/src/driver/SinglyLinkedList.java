@@ -34,7 +34,7 @@ public class SinglyLinkedList
     }
     
     //Append: add newNode to the end of the list
-    public void append(int value)
+    public void Append(int value)
     {
     	SinglyLinkedListNode newNode = new SinglyLinkedListNode(value);
     	if (this.isEmpty())//when the list is empty
@@ -124,6 +124,10 @@ public class SinglyLinkedList
     					node.nextNode = null;
     					return true;
     				}
+    				else
+    				{
+    					previous = previous.nextNode;
+    				}
     			}
     			return false;
     		}
@@ -154,18 +158,195 @@ public class SinglyLinkedList
     //Print
     public void Print()
     {
-    	String output = "";
+    	System.out.println(this);
+    }  
+    @Override
+    public String toString()
+    {
+    	if(this.isEmpty())
+    	{
+    		System.out.println("(0){empty}");
+    	}
     	SinglyLinkedListNode node = this.header;
+    	String output = "Length: (" + this.getLength() + ")" + " The List: {" + node;
+    	node = this.header.nextNode;
     	while(node != null)
     	{
     		output = output + ", " + node;
+    		node = node.nextNode;
     	}
-    	output = output + ";";
-    	System.out.println(output);
+    	output = output + "}";
+    	return output;
     }
     //PrintReverse
-    //Sort
-    //isEmpty
+    public void PrintReverse()
+    {
+    	if(this.isEmpty())
+    	{
+    		System.out.println("(0){empty}");
+    	}
+    	SinglyLinkedListNode node = this.header;
+    	String output = node.toString();//1
+    	node = this.header.nextNode;
+    	while(node != null)
+    	{
+    		output = node + " < " + output;
+    		node = node.nextNode;
+    	}
+    	//output is "3 < 2 < 1" -> "(3){3 < 2 < 1}"
+    	//string format template is "(%d){%s}"
+    	System.out.println("[Reversed] Length: " + String.format("(%d)", this.getLength())
+    					+ " List: " + String.format("{%s}", output));
+    }
+    public void Swap(SinglyLinkedListNode pre_a, SinglyLinkedListNode a, SinglyLinkedListNode pre_b, SinglyLinkedListNode b) 
+    {
+        if (a == b) 
+        {
+        	return; // No need to swap identical nodes
+       	}
+
+        // Link previous nodes to swapped nodes
+        if (pre_a != null) 
+        {
+        	pre_a.nextNode = b;
+        }
+        if (pre_b != null) 
+        {
+        	pre_b.nextNode = a;
+       	}
+
+        // Swap next pointers of a and b
+        SinglyLinkedListNode temp = a.nextNode; // Store the next node of a in temp
+        a.nextNode = b.nextNode; // Point a to b's next node
+        b.nextNode = temp; // Point b to temp (originally a's next node)
+    }
+
+    public void Sort(boolean ascending) {
+        if (this.header == null) return; // List is empty
+
+        boolean swapped; 
+        do {
+            swapped = false; 
+            SinglyLinkedListNode current = this.header; 
+            SinglyLinkedListNode prev = null; 
+
+            // Traverse the list
+            while (current != null && current.nextNode != null) {
+                SinglyLinkedListNode next = current.nextNode; 
+                // Determine if a swap is needed based on ascending boolean
+                boolean shouldSwap = ascending ? (current.payload > next.payload) : (current.payload < next.payload);
+
+                if (shouldSwap) {
+                    Swap(prev, current, current, next); // Swap nodes
+                    swapped = true; // Set swapped flag to true
+                    // Update header if the first node is involved in the swap
+                    if (prev == null) {
+                        this.header = next; 
+                    }
+                    prev = next; 
+                } else {
+                    prev = current; 
+                    current = next; 
+                }
+            }
+        } while (swapped); // Repeat until no more swaps are made
+    }
+
+    
+    
+    
+    
+//    //Swap
+//    public void Swap(SinglyLinkedListNode pre_a, SinglyLinkedListNode a, SinglyLinkedListNode pre_b, SinglyLinkedListNode b)
+//    {
+//    	SinglyLinkedListNode tempNode = new SinglyLinkedListNode();
+//    	pre_a.nextNode = b;
+//    	pre_b.nextNode = a;
+//    	a.nextNode = tempNode;
+//    	a.nextNode = b.nextNode;
+//    	b.nextNode = tempNode;
+//    }
+//    //Sort
+//    public void Sort(boolean ascending)//insert false or true when calling the function to say either ascending or descending
+//    {
+//    	SinglyLinkedListNode node = new SinglyLinkedListNode();
+//    	//how?
+//    	//BubbleSort -> compare neighbor nodes, sort them, move on to next node
+//    	if(ascending == true)
+//    	{
+//    		System.out.println("The list will be sorted ascending");
+//    		node = this.header;
+//        	while(node != null)
+//        	{
+//        		if(node.nextNode == null)
+//        		{
+//        			break;
+//        		}
+//        		else if(node == this.header && node.payload < node.nextNode.payload)
+//        		{
+//        			System.out.println("Starting swap... Current Node: " + node.payload + " Next Node: " + node.nextNode.payload);
+//        			SinglyLinkedListNode tempNode = new SinglyLinkedListNode();
+//        			node.payload = tempNode.payload;
+//        			node.payload = node.nextNode.payload;
+//        			node.nextNode.payload = tempNode.payload;
+//        			System.out.println("Starting swap... Current Node: " + node.payload + " Next Node: " + node.nextNode.payload);
+//        			node = node.nextNode;
+//        		}
+//        		else if (node.payload < node.nextNode.payload)
+//        		{
+//        			System.out.println("Starting swap... Current Node: " + node.payload + " Next Node: " + node.nextNode.payload);
+//        			SinglyLinkedListNode tempNode = new SinglyLinkedListNode();
+//        			node.payload = tempNode.payload;
+//        			node.payload = node.nextNode.payload;
+//        			node.nextNode.payload = tempNode.payload;
+//        			System.out.println("Starting swap... Current Node: " + node.payload + " Next Node: " + node.nextNode.payload);
+//        			node = node.nextNode;
+//        		}
+//        		else
+//        		{
+//        			System.out.println("Moving to next node...");
+//        			node = node.nextNode;
+//        		}
+//        	}
+//    	}
+//    	else
+//    	{
+//    		System.out.println("The list will be sorted descending");
+//    		node = this.header;
+//    		while(node != null)
+//        	{
+//        		if(node.nextNode == null)
+//        		{
+//        			break;
+//        		}
+//        		else if(node == this.header && node.payload > node.nextNode.payload)
+//        		{
+//        			System.out.println("Starting swap... Current Node: " + node.payload + " Next Node: " + node.nextNode.payload);
+//        			SinglyLinkedListNode tempNode = new SinglyLinkedListNode();
+//        			node.payload = tempNode.payload;
+//        			node.payload = node.nextNode.payload;
+//        			node.nextNode.payload = tempNode.payload;
+//        			System.out.println("Starting swap... Current Node: " + node.payload + " Next Node: " + node.nextNode.payload);
+//        			node = node.nextNode;
+//        		}
+//        		else if (node.payload > node.nextNode.payload)
+//        		{
+//        			System.out.println("Starting swap... Current Node: " + node.payload + " Next Node: " + node.nextNode.payload);
+//        			SinglyLinkedListNode tempNode = new SinglyLinkedListNode();
+//        			node.payload = tempNode.payload;
+//        			node.payload = node.nextNode.payload;
+//        			node.nextNode.payload = tempNode.payload;
+//        			System.out.println("Starting swap... Current Node: " + node.payload + " Next Node: " + node.nextNode.payload);
+//        			node = node.nextNode;
+//        		}
+//        		else
+//        		{
+//        			System.out.println("Moving to next node...");
+//        			node = node.nextNode;
+//        		}
+//        	}
+//    	}
+//    }
 }
 
 

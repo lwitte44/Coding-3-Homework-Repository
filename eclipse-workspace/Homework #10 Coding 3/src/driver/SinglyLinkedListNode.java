@@ -16,9 +16,10 @@ public class SinglyLinkedListNode
         this.payload = value;
     }
     //what is the default result of ToString() of an object?
-    public String ToString()
+    @Override
+    public String toString()
     {
-    	
+    	return String.valueOf(this.payload);
     }
     
 }
