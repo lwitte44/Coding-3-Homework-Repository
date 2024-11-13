@@ -63,6 +63,12 @@ public class DoublyLinkedList<T>
 			this.header = node;
 		}
 	}
+	//Print
+	 //Print
+    public void Print()
+    {
+    	System.out.println(this);
+    }  
 	//InsertAfter
 	public boolean InsertAfter(Node<T> preNode, Node<T> node)
 	{
@@ -143,7 +149,7 @@ public class DoublyLinkedList<T>
 	//Search
 	public DoublyLinkedList<T> BadSearch(T value)
 	{
-		DoublyLinkedList<T> result = new DoublyLinkedList();
+		DoublyLinkedList<T> result = new DoublyLinkedList<T>();
 		Node<T> node = this.header;
 		while(node != null)
 		{
@@ -168,5 +174,71 @@ public class DoublyLinkedList<T>
 		}
 		return null;
 	}
-	//Sort()
+
+	public void Sort(boolean ascending) 
+	{
+		// If the list is empty or has only one element
+	    if(this.header == null || this.header.nextNode == null)
+	    {
+	    	return;
+	    }
+
+	    Node<T> sortedHead = null;
+
+	    // Iterate through the original list
+	    Node<T> current = this.header;
+	    while (current != null) 
+	    {
+	    	// Store next for next iteration
+	        Node<T> next = current.nextNode;
+
+	        // Remove all links for `current`
+	        current.preNode = current.nextNode = null;
+
+	        // Insert `current` in the sorted list
+	        sortedHead = sortedInsert(sortedHead, current, ascending);
+
+	        // Move to the next node
+	        current = next;
+	        }
+
+	        // Update head to the new sorted list
+	        this.header = sortedHead;
+	    }
+
+	    public Node<T> sortedInsert(Node<T> sortedHead, Node<T> newNode, boolean ascending) 
+	    {
+	        if (sortedHead == null) 
+	        {
+	            return newNode;
+	        }
+
+	        Node<T> current = sortedHead;
+	        Node<T> prev = null;
+
+	        // Find the correct position to insert the new node
+	        while (current != null && (ascending ? current.compareTo(newNode) < 0 : current.compareTo(newNode) > 0)) 
+	        {
+	            prev = current;
+	            current = current.nextNode;
+	        }
+
+	        // Insert the new node in the sorted list
+	        newNode.nextNode = current;
+	        if (current != null) 
+	        {
+	            current.preNode = newNode;
+	        }
+	        if (prev != null) 
+	        {
+	            prev.nextNode = newNode;
+	            newNode.preNode = prev;
+	        } 
+	        else 
+	        {
+	            sortedHead = newNode; // New node is the new head
+	        }
+
+	        return sortedHead;
+	    }
 }

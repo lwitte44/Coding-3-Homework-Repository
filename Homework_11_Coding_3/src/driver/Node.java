@@ -26,7 +26,7 @@ public class Node<T>
 	//if this is equal to another, return 0
 	//if this is larger than another, return 1(positive)
 	//if this is smaller than another, return -1(negative)
-	@Override
+	//@Override
 	public int compareTo(Node<T> another)
 	{
 		if(another.payload instanceof Integer)
@@ -44,9 +44,11 @@ public class Node<T>
 				return 0;
 			}
 		}
-		else if(this.payload instanceof String)
+		else if(this.payload instanceof String && another.payload instanceof String)
 		{
-			return (String)this.payload.compareTo((String)another.payload);
+			String thisPayload = (String) this.payload; 
+			String anotherPayload = (String) another.payload; 
+			return thisPayload.compareTo(anotherPayload);
 		}
 		else
 		{
