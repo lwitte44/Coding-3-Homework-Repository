@@ -93,5 +93,25 @@ public class StackInterfaceList implements iStack {
 	public boolean IsEmpty() {
 		return this.Header == null;
 	}
+	
+	public boolean IsExpValid(String expr) {
+	    StackInterfaceList stack = new StackInterfaceList();
+
+	    for (char c : expr.toCharArray()) {
+	        if (c == '(') {
+	            Node node = new Node();
+	            node.Payload = String.valueOf(c);
+	            stack.Push(node);
+	        } else if (c == ')') {
+	            if (stack.IsEmpty()) {
+	                return false;
+	            }
+	            stack.Pop();
+	        }
+	    }
+	    return stack.IsEmpty();
+	}
+
+
 
 }

@@ -10,4 +10,6 @@ public abstract class Stack {
 	public abstract int GetLength();
 	
 	public abstract boolean IsEmpty();
+	
+	public abstract boolean IsExpValid(String exp);
 }
