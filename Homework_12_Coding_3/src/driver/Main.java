@@ -18,7 +18,6 @@ public class Main {
 		System.out.println(stack.IsExpValid("(1 + 2 * (3 -1) ) / (1 + 1)"));
 		//stack.IsExpValid("(1 + 2 * (3 -1) / (1 + 1)"); //false
 		System.out.println(stack.IsExpValid("(1 + 2 * (3 -1) / (1 + 1)"));
-		
 	}
 
 }
