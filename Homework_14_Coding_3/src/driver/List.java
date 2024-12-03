@@ -20,7 +20,7 @@ public class List {
 	}
 
 	public boolean IsEmpty() {
-		
+		return this.head == null;
 	}
 	
 	public void Append(Node node) {
@@ -49,7 +49,7 @@ public class List {
 	
 	public void Remove(int inputKey) {
 		if(!this.IsEmpty()) {
-			if(this.head.key == inputKey && this.head.nextNode ==) {
+			if(this.head.key == inputKey && this.head.nextNode == null) {
 				this.head = null;
 			}
 			Node preNode = this.head;
@@ -64,6 +64,24 @@ public class List {
 					node = node.nextNode;
 				}
 			}
+		}
+	}
+	
+	@Override
+	public String toString() {
+		if (this.IsEmpty()) {
+			return "{empty}";
+		} else {
+			String output = "";
+			Node node = this.head;
+			output = "{" + node.toString();
+			Node next = node.nextNode;
+			while (next != null) {
+				output += " -> " + next.toString();
+				next = next.nextNode;
+			}
+			output += "}";
+			return output;
 		}
 	}
 }
