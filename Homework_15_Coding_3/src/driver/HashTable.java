@@ -36,19 +36,41 @@ public class HashTable {
 				return true;
 			} else {
 				index++;
-				
 				if(index == this.size) {
 					index = 0;
 				}
 				toCheck = this.table[index];
 			}
 		}
+		return false;
 	}
 	
-	public boolean Search(int inputKey) {
-		//search one by one
-		//jump over flag empty after removal
-		
+	public Item Search(int inputKey) {
+		int count = 0;
+		int index = Hashing(inputKey);
+		Item toCheck = this.table[index];
+		while(count < this.size) {
+			if (toCheck.flag == ItemFlag.empty_since_start) {
+				return null; //not found
+			} else if (toCheck.flag == ItemFlag.common_item && toCheck.key == inputKey) {
+				return toCheck; //hit
+			} else {
+				count++;
+				index++;
+				if (index == this.size) {
+					index = 0;
+				}
+				toCheck = this.table[index];
+			}
+		}
+		return null; //not found
+	}
+	
+	public void Remove(int key) {
+		Item item = Search(key);
+		if (item != null) {
+			item.flag = ItemFlag.empty_after_removal;
+		}
 	}
 
 }

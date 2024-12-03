@@ -62,7 +62,7 @@ public class Main {
 	public static int generateRandomKey() {
 		Random random = new Random();
 		int generatedInt = random.nextInt(21);
-		System.out.println("I Generated " + generatedInt + "!");
+		//System.out.println("I Generated " + generatedInt + "!");
 		return generatedInt;
 	}
 }
