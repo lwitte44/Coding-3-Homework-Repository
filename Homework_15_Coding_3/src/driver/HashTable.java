@@ -72,5 +72,23 @@ public class HashTable {
 			item.flag = ItemFlag.empty_after_removal;
 		}
 	}
+	
+	public void Display() {
+		String output = "";
+		for (int i = 0; i < this.size; i++) {
+			output += String.format("[%d] %s\n", i, this.table[i].toString());
+		}
+		System.out.println(output);
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
